@@ -1,59 +1,32 @@
 package fr.lernejo;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class SampleTest {
 
     @Test
-    void fact_of_2_should_produce_2() {
+    void test_fact_1() {
         Sample s = new Sample();
-        int num = 2;
-        int factoriel = s.fact(num); // (2)
-        Assertions.assertThat(factoriel).as("!2")
-            .isEqualTo(2); // (2)
-    }
-    @Test
-    void fact_of_negativ_should_throw_excpetion(){
-        Sample s = new Sample();
-        int num = -1;
-        Assertions.assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(()->s.fact(num));
-    }
-    @Test
-    void sum_of_1_and_2_should_produce_3(){
-        Sample s = new Sample();
-        int a= 1;
-        int b = 2;
-        int sum = 1+2;
-        Assertions.assertThat(s.op(Sample.Operation.ADD,a,b)).as("1+2").isEqualTo(3);
+        Assertions.assertThat(s.fact(6)).as("!6")
+            .isEqualTo(720);
     }
 
     @Test
-    void sum_of_3_and_5_should_produce_8(){
+    void test_fact_2() {
         Sample s = new Sample();
-        int a= 3;
-        int b = 5;
-        int sum = a+b;
-        Assertions.assertThat(s.op(Sample.Operation.ADD,a,b)).as("3+5").isEqualTo(8);
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> s.fact(-1));
     }
 
     @Test
-    void mult_of_5_and_4_should_produce_20(){
+    void test_add_operation() {
         Sample s = new Sample();
-        int a = 5;
-        int b = 4;
-        int mult= 5*4;
-        Assertions.assertThat(s.op(Sample.Operation.MULT,a,b)).as("5 * 4").isEqualTo(20);
+        Assertions.assertThat(s.op(Sample.Operation.ADD, 4, 42)).as("4 + 42").isEqualTo(46);
     }
 
     @Test
-    void mult_of_4_and_4_should_produce_16(){
+    void test_mult_operation() {
         Sample s = new Sample();
-        int a = 4;
-        int b = 4;
-        int mult= a*b;
-        Assertions.assertThat(s.op(Sample.Operation.MULT,a,b)).as("4 * 4").isEqualTo(16);
+        Assertions.assertThat(s.op(Sample.Operation.MULT, 4, 25)).as("4 * 25").isEqualTo(100);
     }
 }
